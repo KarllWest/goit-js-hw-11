@@ -8,7 +8,7 @@
   background-color: transparent;
   /* background-color: #000; */
   color: #ff9000;
-  font-weight: 600;
+  font-weight: 601;
 }
 .back-link::before {
   content: '';

@@ -1,20 +1,19 @@
-import axios from 'axios';
+import axios from "axios";
 
-const BASE_URL = 'https://pixabay.com/api/';
-const API_KEY = import.meta.env.VITE_PIXABAY_KEY; 
-
-export function getImagesByQuery(query) {
-    const params = {
-        key: API_KEY,
-        q: query,
+const searchPhotos = axios.create({
+    baseURL: 'https://pixabay.com/api/',
+    params: {
+        key: import.meta.env.VITE_PIXABAY_KEY,
         image_type: 'photo',
         orientation: 'horizontal',
         safesearch: true,
-    };
+    },
+});
 
-    return axios.get(BASE_URL, { params })
-        .then(response => response.data)
+export function getImagesByQuery(query) {
+    return searchPhotos.get('', { params: { q: query } })
+        .then(res => res.data.hits)
         .catch(error => {
-            throw error;
+            throw error
         });
 }
